@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class AppConfig {
 
     @Bean
-    PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+    static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
     }
 

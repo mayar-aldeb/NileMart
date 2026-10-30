@@ -1,14 +1,14 @@
-package org.route;
+package org.route.service.pricing;
 
+import org.route.model.Product;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Component
-@Primary
-public class PromotionalPricingService implements PricingService{
+public class PromotionalPricingService implements PricingService {
 
     private final BigDecimal discountAmount;
 

@@ -12,7 +12,7 @@
         <maven.compiler.source>26</maven.compiler.source>
         <maven.compiler.target>26</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-context.version>7.0.8</spring-context.version>
+        <spring-context.version>7.0.9</spring-context.version>
     </properties>
 
     <dependencies>
@@ -31,6 +31,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.48</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>

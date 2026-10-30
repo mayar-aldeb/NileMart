@@ -1,4 +1,4 @@
-package org.route;
+package org.route.model;
 
 import lombok.*;
 
@@ -16,5 +16,7 @@ public class Product {
     private String sku;
     private BigDecimal price;
     private String category;
-    private boolean isActive;
+    @Builder.Default
+    private boolean isActive=true;
+    private int stockQuantity;
    }

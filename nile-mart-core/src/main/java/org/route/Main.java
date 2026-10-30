@@ -1,42 +1,45 @@
 package org.route;
 
+import org.route.exception.StoreException;
+import org.route.model.Customer;
+import org.route.repository.CustomerRepository;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.math.BigDecimal;
 
 public class Main {
     void main(){
-
-        //        var context = new ClassPathXmlApplicationContext("beans.xml");
-
-
-//        StandardPricingService standard = context.getBean(StandardPricingService.class);
-//        StandardPricingService standard2 = context.getBean(StandardPricingService.class);
-
-//        ProductService p = context.getBean(ProductService.class);
-//
-//        System.out.println(p);
-
         var context = new AnnotationConfigApplicationContext(AppConfig.class);
-//        var context2 = new AnnotationConfigApplicationContext(AppConfig.class);
+        CustomerRepository customerRepository = context.getBean(CustomerRepository.class);
+        Platform platform = context.getBean(Platform.class);
 
-//        StandardPricingService standard = context.getBean(StandardPricingService.class);
-//        StandardPricingService standard2 = context2.getBean(StandardPricingService.class);
+        int choice;
+        do{
+            menu();
+            choice =InputValidation.setInt("Enter your choice: ");
+             if(choice==1){
+                int customerId =InputValidation.setInt("Enter Customer ID: ");
+                try {
+                    Customer customer=customerRepository.findById(customerId)
+                            .orElseThrow(()-> new StoreException("Customer not found."));
+                    platform.platformMenu(customer);
+                }catch(StoreException e){
+                    System.out.println(e.getMessage());
+                }
+            }
+        }while (choice!=2);
 
-//        System.out.println(standard == standard2);
-//        ProductService p = context.getBean(ProductService.class);
-//        System.out.println(standard);
-
-        ProductService productService = context.getBean(ProductService.class);
-
-        System.out.println(productService);
-
-        Product product = Product.builder()
-                .price(BigDecimal.valueOf(100))
-                .build();
-
-        System.out.println(productService.getPrice("PH-SAM-S25", 2));
-
+        context.close();
     }
+
+public void menu(){
+    System.out.println("""
+                ========================================
+                        Nile Mart Platform
+                ========================================""");
+    System.out.println("""
+                1.Log in.
+                2.Exit.""");
+    System.out.println("=======================");
+}
+
 }
