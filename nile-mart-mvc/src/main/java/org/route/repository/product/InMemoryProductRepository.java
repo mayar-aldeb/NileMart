@@ -1,4 +1,4 @@
-package org.route.repository;
+package org.route.repository.product;
 
 import jakarta.annotation.PostConstruct;
 import org.route.model.Product;
@@ -20,14 +20,23 @@ public class InMemoryProductRepository implements ProductRepository {
                 .name("Desk Lamp")
                 .price(BigDecimal.valueOf(500))
                 .inStock(10)
-                .category("furniture")
+                .categorySlug("lighting")
                 .build());
         myProducts.add(Product.builder()
                 .sku("P003")
                 .name("ASUS TUF")
                 .price(BigDecimal.valueOf(24000))
                 .inStock(4)
-                .category("Laptop")
+                .categorySlug("laptops")
+                .brandSlug("asus")
+                .build());
+        myProducts.add(Product.builder()
+                .sku("PH-A55-128")
+                .name("Samsung Galaxy A55 128GB")
+                .price(BigDecimal.valueOf(18500))
+                .inStock(7)
+                .categorySlug("mobile-phones")
+                .brandSlug("samsung")
                 .build());
     }
 

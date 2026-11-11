@@ -1,4 +1,4 @@
-package org.route.repository;
+package org.route.repository.product;
 
 import org.route.model.Product;
 

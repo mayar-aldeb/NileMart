@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nile Mart</title>
+</head>
+<body>
+<style>
+    .field {
+        margin-bottom: 15px;
+    }
+</style>
+
+
+<div class="field">
+    <label for="mainMenu">Main Menu</label>
+    <select id="mainMenu" onchange="if(this.value) window.location.href=this.value">
+        <option value="" selected disabled>Select a page</option>
+        <option th:value="@{/products}">Products</option>
+        <option th:value="@{/brands}">Brands</option>
+        <option th:value="@{/categories}">Categories</option>
+    </select>
+</div>
+
+<form th:action="@{/categories}" th:object ="${category}" method="post">
+    <div class="field">
+        <label>Name <input  th:field ="*{name}"></label>
+        <span th:if="${#fields.hasErrors('name')}" th:errors ="*{name}"></span>
+    </div>
+
+    <div class="field">
+    <label>Slug <input  th:field ="*{slug}"></label>
+    <span th:if="${#fields.hasErrors('slug')}" th:errors ="*{slug}"></span>
+    </div>
+    <div class="field">
+    <label>Parent Slug</label>
+    <select th:field="*{parentSlug}">
+        <option value="">No Parent (Top Level)</option>
+        <option th:each="category : ${topLevelCategories}"
+                th:value="${category.slug}"
+                th:text="${category.name}">
+        </option>
+    </select>
+    <span th:if="${#fields.hasErrors('parentSlug')}" th:errors ="*{parentSlug}"></span>
+    </div>
+    <div class="field">
+    <label>Order <input  th:field ="*{order}"></label>
+    <span th:if="${#fields.hasErrors('order')}" th:errors ="*{order}"></span>
+    </div>
+    <div class="field">
+    <label>Active <input type="checkbox" th:field ="*{active}"></label>
+    </div>
+    <button type="submit">Save category</button>
+</form>
+<a  th:href="@{/categories}">Back to categories</a>
+
+
+</body>
+</html>

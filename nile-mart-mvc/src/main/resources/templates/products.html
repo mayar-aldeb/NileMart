@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Nile-Mart</title>
+    <style>
+        .center-container {
+            display: flex;
+        }
 
+        .add-button {
+            font-size: 20px;
+            padding: 20px 50px;
+            background-color: #333333;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -39,7 +57,13 @@
 </head>
 
 <body>
+<label for="mainMenu">Main Menu</label>
 
+<select id="mainMenu" onchange="if(this.value) window.location.href=this.value">
+    <option value="" selected disabled>Select a page</option>
+    <option th:value="@{/brands}">Brands</option>
+    <option th:value="@{/categories}">Categories</option>
+</select>
 <h1>Available Products</h1>
 
 <table>
@@ -49,6 +73,7 @@
         <th>Name</th>
         <th>Price</th>
         <th>Stock</th>
+        <th>Brand</th>
         <th>Category</th>
     </tr>
     </thead>
@@ -59,9 +84,28 @@
         <td th:text="${product.name}"></td>
         <td th:text="${product.price}"></td>
         <td th:text="${product.inStock}"></td>
-        <td th:text="${product.category}"></td>
+        <td>
+            <span th:if="${product.brandSlug.isEmpty()}">---</span>
+
+            <span th:unless="${product.brandSlug.isEmpty()}"
+                  th:each="brand : ${brands}"
+                  th:if="${brand.slug == product.brandSlug}"
+                  th:text="${brand.name}">
+            </span>
+        </td>
+        <td>
+        <span th:each="category : ${categories}"
+              th:if="${category.slug == product.categorySlug}"
+              th:text="${category.name}">
+        </span>
+        </td>
     </tr>
     </tbody>
 </table>
+<div class="center-container">
+    <a th:href="@{/products/new}" class="add-button">
+        Add Product
+    </a>
+</div>
 </body>
 </html>

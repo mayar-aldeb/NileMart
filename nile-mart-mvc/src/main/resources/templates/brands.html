@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nile-Mart</title>
+    <style>
+        .center-container {
+            display: flex;
+        }
+
+        .add-button {
+            font-size: 20px;
+            padding: 20px 50px;
+            background-color: #333333;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .add-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+<label for="mainMenu">Main Menu</label>
+
+<select id="mainMenu" onchange="if(this.value) window.location.href=this.value">
+    <option value="" selected disabled>Select a page</option>
+    <option th:value="@{/products}">Products</option>
+    <option th:value="@{/categories}">Categories</option>
+</select>
+
+<h1>Available Brands</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Slug</th>
+        <th>Active</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="brand : ${brands}">
+        <td th:text="${brand.name}"></td>
+        <td th:text="${brand.slug}"></td>
+        <td th:text="${brand.active ? 'Yes' : 'No'}"></td>
+    </tr>
+    </tbody>
+</table>
+<div class="center-container">
+    <a th:href="@{/brands/new}" class="add-button">
+        Add Brand
+    </a>
+</div>
+</body>
+</html>
