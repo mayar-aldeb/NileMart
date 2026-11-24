@@ -9,7 +9,7 @@ import org.route.nilemartspringboot.model.Category;
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
 
-    @Mapping(source = "active", target = "isActive")
+
     CategoryResponse toCategoryResponse(Category category);
 
     Category toCategory(AddCategoryRequest request);

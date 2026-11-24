@@ -14,9 +14,9 @@ import java.sql.SQLException;
  * }</pre>
  */
 public final class Database {
-    private static final String URL = "jdbc:oracle:thin:@//localhost:1521/FREEPDB1";
-    private static final String USERNAME = "NILEMART";
-    private static final String PASSWORD = "NileMart123";
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521/FREE";
+    private static final String USERNAME = "SYSTEM";
+    private static final String PASSWORD = "1234";
 
     private Database() {}
 
